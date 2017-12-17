@@ -22,6 +22,9 @@ program orbitpp
 
 ! --- magnetic geometry
   call wrt_geometry
+  
+! --- particle loss
+  call loss
 
 ! --- particle distributions
   call dist

@@ -248,6 +248,7 @@ contains
     real*8, dimension(self%dist%nlive) :: opt, wegtF
     character(len=25) :: filename
     character(len=8) :: numstr
+    character(len=20), dimension(9) :: str_of_orbit
 
     fid = 21
 
@@ -265,6 +266,11 @@ contains
 
     call self%dist%slctvec('opt', opt)
     call self%dist%slctvec('wegtF', wegtF)
+    
+    str_of_orbit = (/'"co-current conf"', '"co-current loss"', &
+        & '"ctr-current conf"', '"ctr-current loss"', &
+        & '"trapped conf"', '"trapped loss"', &
+        & '"stagnation"', '"patato conf"', '"patato loss"'/)
 
     y = 0.d0
     do k = 1, self%dist%nlive
@@ -273,7 +279,7 @@ contains
        end if
     end do
 
-    write(fid, '(I15, E15.6)') (k, y(k), k = 1, self%orbit_types)
+    write(fid, '(I15, E15.6, A21)') (k, y(k), str_of_orbit(k), k = 1, self%orbit_types)
 
     close(fid)
     return

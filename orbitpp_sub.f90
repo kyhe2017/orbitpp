@@ -72,6 +72,52 @@ subroutine pmomenta
   return
 end subroutine pmomenta
 
+subroutine loss
+  use orbitpp_private
+  use mod_interfaces
+  implicit none
+  integer :: m, nloss, fid=7
+  class(diagloss), pointer :: dd
+
+  print*, '#######################################'
+  print*, 'Starting particle loss processing...'
+  print*, ''
+
+  open(14, file='cu2pu', status='old', action='read')
+  open(fid, file='lossdata', status='old', action='read')
+
+  do m = 1, nshot
+! --- load units for every run
+     call load_units(14)
+     
+     read(fid, *) nloss
+
+     if (nloss > 0) then
+        allocate(dd)
+     
+        call dd % init(m, nloss)
+     
+        call dd % ld_data(fid)
+
+! ---
+        call dd % wrt('opt0')
+        call dd % wrt('opt')
+        call dd % wrt('xx0', 'zz0')
+        call dd % wrt('xx', 'zz')
+
+        deallocate(dd)
+     end if
+  end do
+  
+  close(14)
+  close(fid)
+
+  print*, ''
+  print*, 'loss distribution processed...'
+  print*, ''
+  return
+end subroutine loss
+
 subroutine dist
   use orbitpp_private
   use mod_interfaces
@@ -104,7 +150,7 @@ subroutine dist
         if (nlive > 0) then
            allocate(dd)
            allocate(ss)
-!allocate(aux_statistics :: ss)
+           !allocate(aux_statistics :: ss)
 
            call dd % init(n-1, l, nlive)
 

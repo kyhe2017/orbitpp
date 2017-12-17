@@ -14,6 +14,7 @@ ORBITPP_OBJECTS:= \
       orbitpp_private.o \
       geometry.o \
       trajectory.o \
+      diagloss.o \
       distribution.o \
       aux_distribution.o \
       statistics.o \
