@@ -87,6 +87,7 @@ contains
     fid = 21
 
     write(numstr, '(I2)') self%nrun
+    numstr = adjustl(numstr)
     filename = 'loss_'//trim(str)//'_'//trim(numstr)//'.dat'
 
     open(fid, file=filename, status='unknown', action='write')
@@ -110,6 +111,7 @@ contains
     fid = 21
 
     write(numstr, '(I2)') self%nrun
+    numstr = adjustl(numstr)
     filename = 'loss_'//trim(str1)//'_'//trim(str2)//'_'// &
          & trim(numstr)//'.dat'
 
@@ -135,6 +137,7 @@ contains
     fid = 21
 
     write(numstr, '(I2)') self%nrun
+    numstr = adjustl(numstr)
     filename = 'loss_'//trim(str1)//'_'//trim(str2)//'_'//trim(str3)// &
          & '_'//trim(numstr)//'.dat'
 
