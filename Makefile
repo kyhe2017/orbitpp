@@ -15,6 +15,7 @@ ORBITPP_OBJECTS:= \
       geometry.o \
       trajectory.o \
       diagloss.o \
+      Qloss.o \
       distribution.o \
       aux_distribution.o \
       statistics.o \
@@ -23,6 +24,7 @@ ORBITPP_OBJECTS:= \
       csdata.o \
       mod_interfaces.o \
       orbitpp_sub.o \
+      orbitpp_sub2.o \
       orbitpp.o
 
 ORBITPP_SRCS:= $(ORBITPP_OBJECTS:.o=.f90)
